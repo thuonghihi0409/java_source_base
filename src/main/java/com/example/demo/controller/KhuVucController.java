@@ -30,7 +30,7 @@ public class KhuVucController {
     @Autowired
     private KhuVucService khuVucService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<ApiResponse<KhuVucResponse>> create(@Valid @RequestBody KhuVucRequest request) {
         KhuVucResponse response = khuVucService.create(request);
         return ResponseEntity.ok(ApiResponse.success(response, "KhuVuc created successfully"));

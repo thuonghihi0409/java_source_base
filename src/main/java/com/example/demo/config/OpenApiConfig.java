@@ -10,18 +10,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenApiConfig {
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("Demo API Documentation")
-                        .version("1.0.0")
-                        .description("API Documentation for Spring Boot Demo Application"))
-                .components(new Components()
-                        .addSecuritySchemes("bearerAuth", new SecurityScheme()
-                                .type(SecurityScheme.Type.HTTP)
-                                .scheme("bearer")
-                                .bearerFormat("JWT")));
-    }
+        @Bean
+        public OpenAPI customOpenAPI() {
+                return new OpenAPI()
+                                .info(new Info()
+                                                .title("He thong tim viec — API")
+                                                .version("1.0.0")
+                                                .description("Authentication (JWT), Khu vuc. Vai tro: ADMIN, HR, CUSTOMER."))
+                                .components(new Components()
+                                                .addSecuritySchemes("bearerAuth", new SecurityScheme()
+                                                                .type(SecurityScheme.Type.HTTP)
+                                                                .scheme("bearer")
+                                                                .bearerFormat("JWT")));
+        }
 }
-

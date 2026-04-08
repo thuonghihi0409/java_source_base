@@ -45,6 +45,26 @@ public class User {
     @Column(name = "full_name", length = 150)
     private String fullName;
 
+    @Size(max = 20)
+    @Column(name = "phone", length = 20)
+    private String phone;
+
+    @Size(max = 255)
+    @Column(name = "avatar_url", length = 255)
+    private String avatarUrl;
+
+    @Size(max = 255)
+    @Column(name = "address", length = 255)
+    private String address;
+
+    @Size(max = 160)
+    @Column(name = "headline", length = 160)
+    private String headline;
+
+    @Size(max = 2000)
+    @Column(name = "bio", length = 2000)
+    private String bio;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 32)
     private Role role = Role.ROLE_CUSTOMER;

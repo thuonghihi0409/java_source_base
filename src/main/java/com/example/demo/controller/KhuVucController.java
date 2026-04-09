@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,6 +37,11 @@ public class KhuVucController {
         return ResponseEntity.ok(ApiResponse.success(response, "KhuVuc created successfully"));
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<ApiResponse<KhuVucResponse>> createAction(@Valid @RequestBody KhuVucRequest request) {
+        return create(request);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<KhuVucResponse>> getById(@PathVariable Long id) {
         KhuVucResponse response = khuVucService.getById(id);
@@ -48,6 +54,19 @@ public class KhuVucController {
         return ResponseEntity.ok(ApiResponse.success(responses, "KhuVuc list retrieved successfully"));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<ApiResponse<List<KhuVucResponse>>> getAllAction() {
+        return getAll();
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<ApiResponse<Page<KhuVucResponse>>> page(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        return ResponseEntity.ok(ApiResponse.success(khuVucService.page(keyword, page, size), "KhuVuc paged list"));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<KhuVucResponse>> update(
             @PathVariable Long id,
@@ -56,10 +75,22 @@ public class KhuVucController {
         return ResponseEntity.ok(ApiResponse.success(response, "KhuVuc updated successfully"));
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ApiResponse<KhuVucResponse>> updateAction(
+            @PathVariable Long id,
+            @Valid @RequestBody KhuVucRequest request) {
+        return update(id, request);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<String>> delete(@PathVariable Long id) {
         khuVucService.delete(id);
         return ResponseEntity.ok(ApiResponse.success("KhuVuc deleted successfully", "KhuVuc deleted successfully"));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ApiResponse<String>> deleteAction(@PathVariable Long id) {
+        return delete(id);
     }
 
     @GetMapping("/search")

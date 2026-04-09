@@ -18,29 +18,36 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "khu_vuc")
+@Table(name = "cong_ty")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class KhuVuc {
+public class CongTy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Ma khu vuc la bat buoc")
-    @Size(min = 2, max = 30, message = "Ma khu vuc phai tu 2 den 30 ky tu")
-    @Column(name = "ma", unique = true, length = 30)
-    private String ma;
-
-    @NotBlank(message = "Ten khu vuc la bat buoc")
-    @Size(min = 2, max = 100, message = "Ten khu vuc phai tu 2 den 100 ky tu")
-    @Column(name = "ten", nullable = false, unique = true)
+    @NotBlank
+    @Size(max = 200)
+    @Column(nullable = false, unique = true, length = 200)
     private String ten;
 
-    @Size(max = 500, message = "Mo ta khong duoc vuot qua 500 ky tu")
-    @Column(name = "mo_ta", length = 500)
+    @Size(max = 500)
+    @Column(length = 500)
     private String moTa;
+
+    @Size(max = 255)
+    @Column(name = "website", length = 255)
+    private String website;
+
+    @Size(max = 255)
+    @Column(name = "dia_chi", length = 255)
+    private String diaChi;
+
+    @Size(max = 255)
+    @Column(name = "logo_url", length = 255)
+    private String logoUrl;
 
     @Column(name = "is_active")
     private Boolean isActive = true;

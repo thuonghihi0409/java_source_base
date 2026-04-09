@@ -18,28 +18,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "khu_vuc")
+@Table(name = "hinh_thuc_lam_viec")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class KhuVuc {
+public class HinhThucLamViec {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Ma khu vuc la bat buoc")
-    @Size(min = 2, max = 30, message = "Ma khu vuc phai tu 2 den 30 ky tu")
-    @Column(name = "ma", unique = true, length = 30)
+    @NotBlank
+    @Size(max = 30)
+    @Column(name = "ma", nullable = false, unique = true, length = 30)
     private String ma;
 
-    @NotBlank(message = "Ten khu vuc la bat buoc")
-    @Size(min = 2, max = 100, message = "Ten khu vuc phai tu 2 den 100 ky tu")
-    @Column(name = "ten", nullable = false, unique = true)
+    @NotBlank
+    @Size(max = 100)
+    @Column(name = "ten", nullable = false, unique = true, length = 100)
     private String ten;
 
-    @Size(max = 500, message = "Mo ta khong duoc vuot qua 500 ky tu")
-    @Column(name = "mo_ta", length = 500)
+    @Size(max = 255)
+    @Column(name = "mo_ta", length = 255)
     private String moTa;
 
     @Column(name = "is_active")

@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.hinhthuclamviec;
 
 import java.time.LocalDateTime;
 
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class KhuVucResponse {
-
+public class HinhThucLamViecResponse {
     private Long id;
     private String ma;
     private String ten;

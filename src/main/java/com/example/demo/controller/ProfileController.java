@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ApiResponse;
+import com.example.demo.dto.nguoidung.NguoiDungAdminUpdateRequest;
 import com.example.demo.dto.profile.ProfileResponse;
 import com.example.demo.dto.profile.UpdateAvatarRequest;
 import com.example.demo.dto.profile.UpdateProfileRequest;
 import com.example.demo.entity.Role;
+import com.example.demo.service.NguoiDungService;
 import com.example.demo.service.ProfileService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,9 +32,11 @@ import jakarta.validation.Valid;
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final NguoiDungService nguoiDungService;
 
-    public ProfileController(ProfileService profileService) {
+    public ProfileController(ProfileService profileService, NguoiDungService nguoiDungService) {
         this.profileService = profileService;
+        this.nguoiDungService = nguoiDungService;
     }
 
     @GetMapping("/me")
@@ -57,7 +61,7 @@ public class ProfileController {
     @GetMapping("/users/{userId}")
     @Operation(summary = "ADMIN/HR: xem profile cua user theo ID")
     public ResponseEntity<ApiResponse<ProfileResponse>> getUserById(@PathVariable Long userId) {
-        return ResponseEntity.ok(ApiResponse.success(profileService.getUserProfileById(userId), "OK"));
+        return ResponseEntity.ok(ApiResponse.success(nguoiDungService.getById(userId), "OK"));
     }
 
     @GetMapping("/users")
@@ -68,6 +72,15 @@ public class ProfileController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
         return ResponseEntity.ok(ApiResponse.success(
-                profileService.searchUsers(role, keyword, page, size), "OK"));
+                nguoiDungService.search(role, keyword, page, size), "OK"));
+    }
+
+    @PutMapping("/users/{userId}")
+    @Operation(summary = "ADMIN: cap nhat role/trang thai thong tin user")
+    public ResponseEntity<ApiResponse<ProfileResponse>> adminUpdateUser(
+            @PathVariable Long userId,
+            @RequestBody NguoiDungAdminUpdateRequest request) {
+        return ResponseEntity.ok(ApiResponse.success(
+                nguoiDungService.adminUpdate(userId, request), "User updated"));
     }
 }

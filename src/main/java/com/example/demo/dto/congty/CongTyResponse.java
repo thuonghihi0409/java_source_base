@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.congty;
 
 import java.time.LocalDateTime;
 
@@ -9,12 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class KhuVucResponse {
-
+public class CongTyResponse {
     private Long id;
-    private String ma;
     private String ten;
     private String moTa;
+    private String website;
+    private String diaChi;
+    private String logoUrl;
     private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

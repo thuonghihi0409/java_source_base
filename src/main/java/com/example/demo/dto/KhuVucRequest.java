@@ -7,6 +7,10 @@ import lombok.Data;
 @Data
 public class KhuVucRequest {
 
+    @NotBlank(message = "Ma khu vuc la bat buoc")
+    @Size(min = 2, max = 30, message = "Ma khu vuc phai tu 2 den 30 ky tu")
+    private String ma;
+
     @NotBlank(message = "Ten khu vuc la bat buoc")
     @Size(min = 2, max = 100, message = "Ten khu vuc phai tu 2 den 100 ky tu")
     private String ten;
